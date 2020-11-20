@@ -1,0 +1,61 @@
+
+<div>
+
+    <!--头部-->
+    <div class="todo-header">
+        <a nz-dropdown [nzDropdownMenu]="menu">
+            {{todo.title}}
+            <i nz-icon nzType="down"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item *ngFor="let todo of todoList" (click)="chooseTodo(todo)">{{todo.title}}</li>
+                <li nz-menu-divider></li>
+                <li nz-menu-item>增加</li>
+            </ul>
+        </nz-dropdown-menu>
+    </div>
+
+    <!--未完成的-->
+    <div>
+        <div>
+            未完成的
+            <button nz-button nzType="link" nzShape="circle" nzSize=small (click)="addItem()">
+                <i nz-icon nzType="plus"></i>
+            </button>
+        </div>
+        <nz-list nzBordered>
+          <nz-list-item *ngFor="let item of todo.items">
+            <button nz-button nzType="text" nzShape="circle" nzSize=small (click)="completeItem(item)">
+                <i nz-icon nzType="check"></i>
+            </button>
+            <input nz-input nzBorderless class="todo-button" [ngModel]="item.title" />
+            <button nz-button nzType="link" nzShape="circle" nzSize=small (click)="deleteItem(item)">
+                <i nz-icon nzType="close"></i>
+                </button>
+          </nz-list-item>
+        </nz-list>
+    </div>
+
+            <!-- <el-button class="todo-button" size="mini" icon="el-icon-check" circle @click="updateStatus(item, true)"></el-button>
+            <el-input class="todo-title" size="small" v-model="item.title" @change="updateItem(item)"></el-input>
+            <el-button class="todo-button" size="mini" icon="el-icon-delete" circle @click="removeItem(item)"></el-button> -->
+
+
+    <!--已完成的-->
+    <div *ngIf="todo.completedItems">
+        <div>已完成的</div>
+        <nz-list nzBordered>
+          <nz-list-item *ngFor="let item of todo.completedItems">
+            <button nz-button nzType="text" nzShape="circle" nzSize=small (click)="completeItem(item)">
+                <i nz-icon nzType="check"></i>
+            </button>
+            <input nz-input nzBorderless class="todo-button" [ngModel]="item.title" />
+            <button nz-button nzType="link" nzShape="circle" nzSize=small (click)="deleteItem(item)">
+                <i nz-icon nzType="close"></i>
+            </button>
+          </nz-list-item>
+        </nz-list>
+    </div>
+
+</div>
