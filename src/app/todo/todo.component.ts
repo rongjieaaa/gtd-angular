@@ -43,7 +43,7 @@ export class TodoComponent implements OnInit {
   }
 
   updateTodoItems(todo?: Todo): Todo {
-
+    debugger
     if(todo == undefined) {
       todo = this.todo;
     }
